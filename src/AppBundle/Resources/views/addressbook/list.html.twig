@@ -1,0 +1,66 @@
+<div class="table-responsive">
+    <table class="table addressBook-list">
+        <thead>
+        <tr>
+            <th></th>
+            <th {% if pagination.isSorted('a.id') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'ID', 'a.id') }}</th>
+            <th {% if pagination.isSorted('a.firstName') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Firstname', 'a.firstName') }}</th>
+            <th {% if pagination.isSorted('a.lastName') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Lastname', 'a.lastName') }}</th>
+            <th {% if pagination.isSorted('a.city') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'City', 'a.city') }}</th>
+            <th {% if pagination.isSorted('a.country') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Country', 'a.country') }}</th>
+            <th {% if pagination.isSorted('a.phone') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Phone', 'a.phone') }}</th>
+            <th {% if pagination.isSorted('a.email') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Email', 'a.email') }}</th>
+            <th {% if pagination.isSorted('a.birthday') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'Birthday', 'a.birthday') }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if pagination|length > 0 %}
+
+            {% for addressBook in pagination %}
+                <tr>
+                    <td>
+                            <img class="rounded d-block"
+                                 src="{{ asset('uploads/pictures/'~ (addressBook.picture ? addressBook.picture : 'default')  ) | imagine_filter('square',{"thumbnail": {"size": [140, 150] }}) }}"/>{# You can replace big with square/small #}
+                    </td>
+                    <td>{{ addressBook.id }}</td>
+                    <td>{{ addressBook.firstName }}</td>
+                    <td>{{ addressBook.lastName }}</td>
+                    <td>{{ addressBook.city }}</td>
+                    <td>{{ addressBook.country }}</td>
+                    <td>{{ addressBook.phone }}</td>
+                    <td>{{ addressBook.email }}</td>
+                    <td>{% if addressBook.birthday %}{{ addressBook.birthday|date('Y-m-d') }}{% endif %}</td>
+                    <td>
+                        <ul class="actions">
+                            <li>
+                                <a class="viewAddressBook btn btn-sm btn-info"
+                                   href="{{ path('addressbook_show', { 'id': addressBook.id }) }}"><i
+                                            class="fa fa-eye"></i> </a>
+                            </li>
+                            <li>
+                                <a class="btn btn-sm btn-info" href="{{ path('addressbook_edit', { 'id': addressBook.id }) }}"><i
+                                            class="fa fa-edit"></i> </a>
+                            </li>
+                            <li>
+                                <a class="deleteAddressBook btn btn-sm btn-danger"
+                                   href="{{ path('addressbook_delete', { 'id': addressBook.id }) }}"><i
+                                            class="fa fa-trash"></i> </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="9" class="text-center">No Data</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+</div>
+
+<div class="col-12 pagination-wrapper">
+    {{ knp_pagination_render(pagination) }}
+</div>

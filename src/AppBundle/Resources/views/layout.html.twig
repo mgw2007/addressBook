@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            {% stylesheets
+            'bundles/app/css/*'
+            filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+        {% endblock %}
+        {% block javascripts %}
+
+            {% javascripts
+            'bundles/app/js/jquery-3.3.1.min.js'
+            'bundles/app/js/bootstrap.js'
+            'bundles/app/js/bootstrap.bundle.js'
+            'bundles/app/js/bootstrap.bundle.js'
+            'bundles/app/js/bootstrap-alert.min.js'
+            'bundles/app/js/fileinput.js' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    </head>
+    <body>
+
+        <header class="navbar navbar-expand navbar-dark bg-dark flex-column flex-md-row bd-navbar ">
+            {#navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar#}
+
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ path('addressbook_index') }}">Home <span
+                                    class="sr-only">(current)</span></a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </header>
+
+        <div class="container-fluid">
+            <div class="row flex-xl-nowrap p-3">
+                <main class="col-12 offset-lg-1 col-lg-10 bd-content">
+                    {% for message in app.flashes('success') %}
+                        <div class="flash-notice">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                        </div>
+                    {% endfor %}
+                    {% block body %}{% endblock %}
+                </main>
+            </div>
+
+
+        </div>
+    </body>
+</html>

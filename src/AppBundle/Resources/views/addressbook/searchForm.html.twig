@@ -1,0 +1,26 @@
+<form action="{{ path('addressbook_list') }}" id="searchForm" class="mt-3">
+    <div class="form-row align-items-center">
+        <div class="col-auto">
+            <label class="sr-only" for="inlineFormInput">Value</label>
+            <input type="text" name="filter_value" class="form-control mb-2" id="inlineFormInput"
+                   placeholder="search...">
+        </div>
+        <div class="col-auto">
+            <label class="sr-only" name="filter_value_name" for="inlineFormInput"></label>
+            <select class="form-control mb-2" name="filter_key" id="inlineFormInput">
+                <option value="">All</option>
+                <option value="firstName">First Name</option>
+                <option value="lastName">Last Name</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone</option>
+                <option value="country">Country</option>
+                <option value="city">City</option>
+            </select>
+        </div>
+
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Search</button>
+        </div>
+    </div>
+</form>

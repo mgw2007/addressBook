@@ -1,0 +1,40 @@
+{% extends "@View/layout.html.twig" %}
+
+
+{% block body %}
+    {% include '@View/addressbook/searchForm.html.twig' %}
+    <div class="card mt-3">
+        <div class="card-header">
+            <h2 class="card-title m-0">
+                Address book <button
+                                class="btn btn-primary float-right"
+                                onclick="window.location.href='{{ path('addressbook_new') }}'">
+                    <i class="fa fa-plus"></i> New</button>
+            </h2>
+        </div>
+        <div class="card-body p-0" id="listContainer">
+
+        </div>
+    </div>
+
+    <!-- View Address Book Modal -->
+    <div class="modal fade" id="viewAddressBookModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="viewAddressBookContainer">
+
+            </div>
+        </div>
+    </div>
+    <input type="hidden" value="{{ path('addressbook_list') }}" id="firstPageUrl"/>
+{% endblock %}
+
+ {% block javascripts %}
+
+     {{ parent() }}
+     {% javascripts
+     'bundles/app/js/addressbook.js' %}
+     <script src="{{ asset_url }}"></script>
+     {% endjavascripts %}
+ {% endblock %}
+

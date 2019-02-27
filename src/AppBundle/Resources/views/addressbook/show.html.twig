@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel"># {{ addressBook.id }} {{ addressBook.firstName }} {{ addressBook.lastName }}</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body pt-0">
+        <div class="row">
+            <div class="col-12 img-wrapper" style="background-image: url({{ asset('uploads/pictures/'~ addressBook.picture ) | imagine_filter('square',{"thumbnail": {"size": [180, 200] }}) }});">
+                {% if addressBook.picture %}
+                    <img class="card-img"
+                         src="{{ asset('uploads/pictures/'~ addressBook.picture ) | imagine_filter('square',{"thumbnail": {"size": [180, 250] }}) }}"/>{# You can replace big with square/small #}
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <div class="form form-custom row mt-3">
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <label>Phone</label>
+                        <p class="form-control-plaintext">{{ addressBook.phone }}</p>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <label>Email</label>
+                        <p class="form-control-plaintext">{{ addressBook.email }}</p>
+                    </div>
+                     <div class="form-group col-xs-12 col-sm-6">
+                        <label>Street Name</label>
+                        <p class="form-control-plaintext">{{ addressBook.streetName }}</p>
+                    </div>
+                   <div class="form-group col-xs-12 col-sm-6">
+                        <label>Street Number</label>
+                        <p class="form-control-plaintext">{{ addressBook.streetNumber }}</p>
+                    </div>
+                     <div class="form-group col-xs-12 col-sm-6">
+                        <label>Zip</label>
+                        <p class="form-control-plaintext">{{ addressBook.zip }}</p>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <label>City</label>
+                        <p class="form-control-plaintext">{{ addressBook.city }}</p>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <label>Country</label>
+                        <p class="form-control-plaintext">{{ addressBook.country }}</p>
+                    </div>
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <label>Birthday</label>
+                        <p class="form-control-plaintext">{% if addressBook.birthday %}{{ addressBook.birthday|date('Y-m-d') }}{% endif %}</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+</div>

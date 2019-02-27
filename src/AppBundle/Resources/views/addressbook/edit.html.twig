@@ -1,0 +1,35 @@
+{% extends "@View/layout.html.twig" %}
+{% form_theme edit_form '@View/form/bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    <div class="card mt-3">
+        <div class="card-header">
+            <h2 class="card-title m-0">
+                Address Book edit
+            </h2>
+        </div>
+        {{ form_start(edit_form) }}
+        <div class="card-body">
+            {{ form_widget(edit_form,{'attr':{'class':'row'}}) }}
+        </div>
+        <div class="card-footer text-right">
+            <input type="submit" value="Save" class="btn  btn-primary"/>
+            <a href="{{ path('addressbook_index') }}" class="btn  btn-danger">Back to the list</a>
+        </div>
+        {{ form_end(edit_form) }}
+        <input id="oldImage" type="hidden" value="{{ edit_form.vars.value.picture ?
+        asset('uploads/pictures/'~ edit_form.vars.value.picture ) | imagine_filter('square',{"thumbnail": {"size": [140, 150] }}) : '' }}"/>
+
+    </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+    {% javascripts
+    'bundles/app/js/addressbook_form.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

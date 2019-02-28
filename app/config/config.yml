@@ -8,7 +8,7 @@ imports:
 parameters:
     locale: en
     picture_directory: '%kernel.project_dir%/web/uploads/pictures/'
-    page_range: 1
+    page_range: 5
 framework:
     #esi: ~
     translator: { fallbacks: ['%locale%'] }
